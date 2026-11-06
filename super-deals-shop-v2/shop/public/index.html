@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Super Deals — Deals Every Day</title>
+<meta name="description" content="Shop unbeatable daily deals: clearance, special offers and limited-time flash deals." />
+<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+
+<main>
+  <!-- HERO: Super Deals (featured 2–3 products, empty until added in admin) -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-bar">
+        <span class="flame">🔥</span>
+        <h1>Super Deals</h1>
+        <span class="tag">TODAY'S BEST</span>
+      </div>
+      <div id="superdeals" class="hero-grid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- Navigation shortcuts to the four shopping categories -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2>Shop by Category</h2></div>
+      <div id="cat-strip" class="grid" style="grid-template-columns:repeat(4,1fr)"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+<script src="/js/common.js"></script>
+<script src="/js/home.js"></script>
+</body>
+</html>

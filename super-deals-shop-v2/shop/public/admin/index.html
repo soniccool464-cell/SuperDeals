@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin — Super Deals</title>
+<meta name="robots" content="noindex,nofollow" />
+<link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-view" class="login-wrap hidden">
+  <form class="login-card" id="login-form">
+    <div class="brand-badge"><span class="b1">Super</span><span class="b2">Deals</span></div>
+    <h1>Admin sign in</h1>
+    <div class="sub">This dashboard is private. Authorized access only.</div>
+    <div id="login-err" class="err hidden"></div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required />
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required />
+    </div>
+    <button class="btn" type="submit" style="width:100%">Sign in</button>
+  </form>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash-view" class="hidden">
+  <div class="topbar">
+    <div class="inner">
+      <span class="brand"><span class="b1">Super</span><span class="b2">Deals</span> · Admin</span>
+      <span class="who" id="who"></span>
+      <button class="btn sec tiny" id="logout">Log out</button>
+    </div>
+    <div class="tabbar">
+      <button data-tab="products" class="active">Products</button>
+      <button data-tab="orders">Orders</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- PRODUCTS -->
+    <section id="tab-products">
+      <div class="panel-head">
+        <h2>Products</h2>
+        <span class="count-note" id="feat-note"></span>
+        <span class="sp"></span>
+        <button class="btn" id="add-btn">+ Add product</button>
+      </div>
+      <div class="filters">
+        <select id="filter-cat">
+          <option value="">All categories</option>
+          <option value="fat-loss-abs">Fat Loss / Abs</option>
+          <option value="clearance-deals">Clearance Deals</option>
+          <option value="special-deals">Special Deals</option>
+          <option value="limited-time-offers">Limited Time Offers</option>
+        </select>
+      </div>
+      <div id="products-host"></div>
+    </section>
+
+    <!-- ORDERS -->
+    <section id="tab-orders" class="hidden">
+      <div class="panel-head"><h2>Customer Orders</h2></div>
+      <div id="orders-host"></div>
+    </section>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="modal-host"></div>
+<div id="order-modal-host"></div>
+
+<script src="/admin/admin.js"></script>
+</body>
+</html>

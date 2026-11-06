@@ -1,0 +1,22 @@
+{
+  "name": "deals-shop",
+  "version": "1.0.0",
+  "description": "Deals-focused online shopping site with admin dashboard and Stripe Checkout",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "init-admin": "node scripts/set-admin-password.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.8.1",
+    "connect-sqlite3": "^0.9.15",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "multer": "^2.5.0",
+    "stripe": "^17.5.0"
+  }
+}

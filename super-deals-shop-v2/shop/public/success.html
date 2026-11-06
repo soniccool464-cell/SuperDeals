@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Order Confirmed — Super Deals</title>
+<link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<div id="site-header"></div>
+<main class="container">
+  <div id="confirm-root">
+    <div class="confirm"><p>Checking your order…</p></div>
+  </div>
+</main>
+<div id="site-footer"></div>
+<script src="/js/common.js"></script>
+<script>
+(async function () {
+  'use strict';
+  await Shop.init('');
+  const root = document.getElementById('confirm-root');
+  const sessionId = new URLSearchParams(location.search).get('session_id');
+
+  if (!sessionId) {
+    root.innerHTML = `<div class="confirm"><h1>No order found</h1><p class="oid">Missing session reference.</p><a class="btn" href="/">Back to shop</a></div>`;
+    return;
+  }
+  try {
+    const r = await Shop.api('/api/checkout/session/' + encodeURIComponent(sessionId));
+    if (r.paid) {
+      Shop.cartClear();
+      const lines = (r.items || [])
+        .map((i) => `<div class="li"><span>${Shop.esc(i.name)} × ${i.qty}</span><span>${Shop.money(i.lineAmount)}</span></div>`)
+        .join('');
+      root.innerHTML = `
+        <div class="confirm">
+          <div class="check"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h1>Thank you! Your order is confirmed.</h1>
+          <p class="oid">Order #${r.orderId || '—'} • A receipt was sent to ${Shop.esc(r.email || 'your email')}</p>
+          <div class="lines">
+            ${lines}
+            <div class="li" style="border-top:1px solid var(--line);margin-top:8px;padding-top:12px;font-weight:900"><span>Total paid</span><span>${Shop.money(r.amountTotal)}</span></div>
+          </div>
+          <p style="margin-top:22px"><a class="btn" href="/">Continue shopping</a></p>
+        </div>`;
+    } else {
+      root.innerHTML = `<div class="confirm"><h1>Payment not completed</h1><p class="oid">Your payment status is "${Shop.esc(r.status)}".</p><a class="btn" href="/cart.html">Return to cart</a></div>`;
+    }
+  } catch (e) {
+    root.innerHTML = `<div class="confirm"><h1>We couldn't verify this order</h1><p class="oid">${Shop.esc(e.message)}</p><a class="btn" href="/">Back to shop</a></div>`;
+  }
+})();
+</script>
+</body>
+</html>
